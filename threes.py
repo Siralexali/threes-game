@@ -28,7 +28,7 @@ def left(mat):
     return mat
 
 
-def randoml(mat):
+def randoml(mat, k, d):
     m = 0
     tmp = {}
     key = []
@@ -38,9 +38,6 @@ def randoml(mat):
             key = [i]
     for i in range(m):
         tmp[i] = key[i]
-    kd = input().split()
-    k = int(kd[0])
-    d = int(kd[1])
     mat[tmp[k % m]][-1] = d
     return mat
 
@@ -64,7 +61,7 @@ def right(mat):
     return mat
 
 
-def randomr(mat):
+def randomr(mat, k, d):
     m = 0
     tmp = {}
     key = []
@@ -74,9 +71,6 @@ def randomr(mat):
             key = [i]
     for i in range(m):
         tmp[i] = key[i]
-    kd = input().split()
-    k = int(kd[0])
-    d = int(kd[1])
     mat[tmp[k % m]][0] = d
     return mat
 
@@ -100,7 +94,7 @@ def up(mat):
     return mat
 
 
-def randomu(mat):
+def randomu(mat, k, d):
     m = 0
     tmp = {}
     key = []
@@ -110,9 +104,6 @@ def randomu(mat):
             key = [i]
     for i in range(m):
         tmp[i] = key[i]
-    kd = input().split()
-    k = int(kd[0])
-    d = int(kd[1])
     mat[-1][tmp[k % m]] = d
     return mat
 
@@ -136,7 +127,7 @@ def down(mat):
     return mat
 
 
-def randomd(mat):
+def randomd(mat, k, d):
     m = 0
     tmp = {}
     key = []
@@ -146,8 +137,36 @@ def randomd(mat):
             key = [i]
     for i in range(m):
         tmp[i] = key[i]
-    kd = input().split()
-    k = int(kd[0])
-    d = int(kd[1])
     mat[0][tmp[k % m]] = d
     return mat
+
+
+for i in side:
+    if i == 'R':
+        kd = input().split()
+        k = int(kd[0])
+        d = int(kd[1])
+        mat1 = [i[:] for i in mat]
+        if right(mat) != mat1:
+            randomr(mat, k, d)
+    elif i == 'L':
+        kd = input().split()
+        k = int(kd[0])
+        d = int(kd[1])
+        mat1 = [i[:] for i in mat]
+        if left(mat) != mat1:
+            randomr(mat, k, d)
+    elif i == 'U':
+        kd = input().split()
+        k = int(kd[0])
+        d = int(kd[1])
+        mat1 = [i[:] for i in mat]
+        if left(up) != mat1:
+            randomr(mat, k, d)
+    elif i == 'D':
+        kd = input().split()
+        k = int(kd[0])
+        d = int(kd[1])
+        mat1 = [i[:] for i in mat]
+        if left(down) != mat1:
+            randomr(mat, k, d)
