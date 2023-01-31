@@ -170,3 +170,25 @@ for i in side:
         mat1 = [i[:] for i in mat]
         if left(down) != mat1:
             randomr(mat, k, d)
+
+for i in range(len(mat)):
+    for j in range(len(mat)):
+        print(mat[i][j], end='	')
+    print()
+
+
+score = 0
+for i in range(len(mat)):
+    for j in range(len(mat)):
+        if mat[i][j] > 2:
+            div = mat[i][j] // 3
+            power = 0
+            while 2 ** power != div:
+                power += 1
+            score += 3 ** (power + 1)
+
+mat1 = [i[:] for i in mat]
+if (mat1 == right(mat)) and (mat1 == (up(mat)) and ((mat1) == down(mat)) and (mat1 == left(mat))):
+    print('The final score is ' + str(score) + '.')
+else:
+    print('The partial score is ' + str(score) + '.')
