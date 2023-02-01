@@ -14,10 +14,6 @@ def left(mat):
     for i in range(tedad):
         for j in range(tedad-1):
             if mat[i][j] == 0:
-                (mat[i][j], mat[i][j+1]) = (mat[i][j+1], mat[i][j])
-    for i in range(tedad):
-        for j in range(tedad-1):
-            if mat[i][j] == 0:
                 break
             elif mat[i][j] > 2 and (mat[i][j] == mat[i][j+1]):
                 mat[i][j] = mat[i][j] + mat[i][j+1]
@@ -27,6 +23,10 @@ def left(mat):
                 mat[i][j] = mat[i][j] + mat[i][j+1]
                 mat[i][j+1] = 0
                 break
+    for i in range(tedad):
+        for j in range(tedad-1):
+            if mat[i][j] == 0:
+                (mat[i][j], mat[i][j+1]) = (mat[i][j+1], mat[i][j])
     return mat
 
 
@@ -37,7 +37,7 @@ def randoml(mat, k, d):
     for i in range(len(mat)):
         if 0 == mat[i][-1]:
             m += 1
-            key = [i]
+            key += [i]
     i = 0
     for x in key:
         tmp[i] = x
@@ -48,12 +48,8 @@ def randoml(mat, k, d):
 
 def right(mat):
     tedad = len(mat)
-    for i in range(tedad):
-        for j in range(-1, tedad, -1):
-            if mat[i][j] == 0:
-                (mat[i][j], mat[i][j-1]) = (mat[i][j-1], mat[i][j])
-    for i in range(tedad):
-        for j in range(-1, tedad, -1):
+    for i in range(-1, -tedad-1, -1):
+        for j in range(-1, -tedad, -1):
             if mat[i][j] == 0:
                 break
             elif mat[i][j] > 2 and (mat[i][j] == mat[i][j-1]):
@@ -64,6 +60,10 @@ def right(mat):
                 mat[i][j] = mat[i][j] + mat[i][j-1]
                 mat[i][j-1] = 0
                 break
+    for i in range(-1, -tedad-1, -1):
+        for j in range(-1, -tedad, -1):
+            if mat[i][j] == 0:
+                (mat[i][j], mat[i][j-1]) = (mat[i][j-1], mat[i][j])
     return mat
 
 
@@ -74,7 +74,7 @@ def randomr(mat, k, d):
     for i in range(len(mat)):
         if 0 == mat[i][0]:
             m += 1
-            key = [i]
+            key += [i]
     i = 0
     for x in key:
         tmp[i] = x
@@ -88,10 +88,6 @@ def up(mat):
     for j in range(tedad):
         for i in range(tedad-1):
             if mat[i][j] == 0:
-                (mat[i][j], mat[i+1][j]) = (mat[i+1][j], mat[i][j])
-    for j in range(tedad):
-        for i in range(tedad-1):
-            if mat[j][i] == 0:
                 break
             elif mat[i][j] > 2 and (mat[i][j] == mat[i+1][j]):
                 mat[i][j] = mat[i][j] + mat[i+1][j]
@@ -101,6 +97,10 @@ def up(mat):
                 mat[i][j] = mat[i][j] + mat[i+1][j]
                 mat[i+1][j] = 0
                 break
+    for j in range(tedad):
+        for i in range(tedad-1):
+            if mat[i][j] == 0:
+                (mat[i][j], mat[i+1][j]) = (mat[i+1][j], mat[i][j])
     return mat
 
 
@@ -111,7 +111,7 @@ def randomu(mat, k, d):
     for i in range(len(mat)):
         if 0 == mat[-1][i]:
             m += 1
-            key = [i]
+            key += [i]
     i = 0
     for x in key:
         tmp[i] = x
@@ -122,13 +122,9 @@ def randomu(mat, k, d):
 
 def down(mat):
     tedad = len(mat)
-    for j in range(tedad):
-        for i in range(-1, tedad, -1):
+    for j in range(-1, -tedad-1, -1):
+        for i in range(-1, -tedad, -1):
             if mat[i][j] == 0:
-                (mat[i][j], mat[i-1][j]) = (mat[i-1][j], mat[i][j])
-    for j in range(tedad):
-        for i in range(-1, tedad, -1):
-            if mat[j][i] == 0:
                 break
             elif mat[i][j] > 2 and (mat[i][j] == mat[i-1][j]):
                 mat[i][j] = mat[i][j] + mat[i-1][j]
@@ -138,6 +134,10 @@ def down(mat):
                 mat[i][j] = mat[i][j] + mat[i-1][j]
                 mat[i-1][j] = 0
                 break
+    for j in range(-1, -tedad-1, -1):
+        for i in range(-1, -tedad, -1):
+            if mat[i][j] == 0:
+                (mat[i][j], mat[i-1][j]) = (mat[i-1][j], mat[i][j])
     return mat
 
 
@@ -148,7 +148,7 @@ def randomd(mat, k, d):
     for i in range(len(mat)):
         if 0 == mat[0][i]:
             m += 1
-            key = [i]
+            key += [i]
     i = 0
     for x in key:
         tmp[i] = x
@@ -171,21 +171,21 @@ for i in side:
             kd = input().split()
             k = int(kd[0])
             d = int(kd[1])
-            randomr(mat, k, d)
+            randoml(mat, k, d)
     elif i == 'U':
         mat1 = [i[:] for i in mat]
-        if left(mat) != mat1:
+        if up(mat) != mat1:
             kd = input().split()
             k = int(kd[0])
             d = int(kd[1])
-            randomr(mat, k, d)
+            randomu(mat, k, d)
     elif i == 'D':
         mat1 = [i[:] for i in mat]
-        if left(mat) != mat1:
+        if down(mat) != mat1:
             kd = input().split()
             k = int(kd[0])
             d = int(kd[1])
-            randomr(mat, k, d)
+            randomd(mat, k, d)
 
 for i in range(len(mat)):
     for j in range(len(mat)):
