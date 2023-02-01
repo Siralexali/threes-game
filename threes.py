@@ -17,7 +17,9 @@ def left(mat):
                 (mat[i][j], mat[i][j+1]) = (mat[i][j+1], mat[i][j])
     for i in range(tedad):
         for j in range(tedad-1):
-            if mat[i][j] > 2 and (mat[i][j] == mat[i][j+1]):
+            if mat[i][j] == 0:
+                break
+            elif mat[i][j] > 2 and (mat[i][j] == mat[i][j+1]):
                 mat[i][j] = mat[i][j] + mat[i][j+1]
                 mat[i][j+1] = 0
                 break
@@ -36,8 +38,10 @@ def randoml(mat, k, d):
         if 0 == mat[i][-1]:
             m += 1
             key = [i]
-    for i in range(m):
-        tmp[i] = key[i]
+    i = 0
+    for x in key:
+        tmp[i] = x
+        i += 1
     mat[tmp[k % m]][-1] = d
     return mat
 
@@ -50,7 +54,9 @@ def right(mat):
                 (mat[i][j], mat[i][j-1]) = (mat[i][j-1], mat[i][j])
     for i in range(tedad):
         for j in range(-1, tedad, -1):
-            if mat[i][j] > 2 and (mat[i][j] == mat[i][j-1]):
+            if mat[i][j] == 0:
+                break
+            elif mat[i][j] > 2 and (mat[i][j] == mat[i][j-1]):
                 mat[i][j] = mat[i][j] + mat[i][j-1]
                 mat[i][j-1] = 0
                 break
@@ -69,8 +75,10 @@ def randomr(mat, k, d):
         if 0 == mat[i][0]:
             m += 1
             key = [i]
-    for i in range(m):
-        tmp[i] = key[i]
+    i = 0
+    for x in key:
+        tmp[i] = x
+        i += 1
     mat[tmp[k % m]][0] = d
     return mat
 
@@ -83,7 +91,9 @@ def up(mat):
                 (mat[i][j], mat[i+1][j]) = (mat[i+1][j], mat[i][j])
     for j in range(tedad):
         for i in range(tedad-1):
-            if mat[i][j] > 2 and (mat[i][j] == mat[i+1][j]):
+            if mat[j][i] == 0:
+                break
+            elif mat[i][j] > 2 and (mat[i][j] == mat[i+1][j]):
                 mat[i][j] = mat[i][j] + mat[i+1][j]
                 mat[i+1][j] = 0
                 break
@@ -102,8 +112,10 @@ def randomu(mat, k, d):
         if 0 == mat[-1][i]:
             m += 1
             key = [i]
-    for i in range(m):
-        tmp[i] = key[i]
+    i = 0
+    for x in key:
+        tmp[i] = x
+        i += 1
     mat[-1][tmp[k % m]] = d
     return mat
 
@@ -116,7 +128,9 @@ def down(mat):
                 (mat[i][j], mat[i-1][j]) = (mat[i-1][j], mat[i][j])
     for j in range(tedad):
         for i in range(-1, tedad, -1):
-            if mat[i][j] > 2 and (mat[i][j] == mat[i-1][j]):
+            if mat[j][i] == 0:
+                break
+            elif mat[i][j] > 2 and (mat[i][j] == mat[i-1][j]):
                 mat[i][j] = mat[i][j] + mat[i-1][j]
                 mat[i-1][j] = 0
                 break
@@ -135,40 +149,42 @@ def randomd(mat, k, d):
         if 0 == mat[0][i]:
             m += 1
             key = [i]
-    for i in range(m):
-        tmp[i] = key[i]
+    i = 0
+    for x in key:
+        tmp[i] = x
+        i += 1
     mat[0][tmp[k % m]] = d
     return mat
 
 
 for i in side:
     if i == 'R':
-        kd = input().split()
-        k = int(kd[0])
-        d = int(kd[1])
         mat1 = [i[:] for i in mat]
         if right(mat) != mat1:
+            kd = input().split()
+            k = int(kd[0])
+            d = int(kd[1])
             randomr(mat, k, d)
     elif i == 'L':
-        kd = input().split()
-        k = int(kd[0])
-        d = int(kd[1])
         mat1 = [i[:] for i in mat]
         if left(mat) != mat1:
+            kd = input().split()
+            k = int(kd[0])
+            d = int(kd[1])
             randomr(mat, k, d)
     elif i == 'U':
-        kd = input().split()
-        k = int(kd[0])
-        d = int(kd[1])
         mat1 = [i[:] for i in mat]
-        if left(up) != mat1:
+        if left(mat) != mat1:
+            kd = input().split()
+            k = int(kd[0])
+            d = int(kd[1])
             randomr(mat, k, d)
     elif i == 'D':
-        kd = input().split()
-        k = int(kd[0])
-        d = int(kd[1])
         mat1 = [i[:] for i in mat]
-        if left(down) != mat1:
+        if left(mat) != mat1:
+            kd = input().split()
+            k = int(kd[0])
+            d = int(kd[1])
             randomr(mat, k, d)
 
 for i in range(len(mat)):
